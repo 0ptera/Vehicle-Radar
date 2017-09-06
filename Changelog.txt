@@ -1,0 +1,3 @@
+0.3.0
+- partially rewritten for 0.15 compability
+- created new sprites from current radar
