@@ -15,10 +15,6 @@ data:extend({
         type = "unlock-recipe",
         recipe = "vehicular-tracker"
       },
-      -- {
-        -- type = "unlock-recipe",
-        -- recipe = "tracker-module"
-      -- },
     },
     unit =
     {

@@ -82,11 +82,35 @@ end)
 ---------------------------------------------------------------------------------------------------
 
 -- script.on_event(defines.events.on_player_placed_equipment, function(event)
-
+  -- for unit, entity in pairs(global.vehicles) do
+    -- if(entity.valid) then
+      -- if(entity.grid == event.grid) then
+        -- update_equipment(unit, event.grid)
+        -- break
+      -- end
+    -- else
+      -- global.vehicles[unit] = nil
+      -- global.braking_vehicles[unit] = nil
+      -- transformer_for_unit[unit] = nil
+      -- regen_brake_for_unit[unit] = nil
+    -- end
+  -- end
 -- end)
 
 -- script.on_event(defines.events.on_player_removed_equipment, function(event)
-
+  -- for unit, entity in pairs(global.vehicles) do
+    -- if(entity.valid) then
+      -- if(entity.grid == event.grid) then
+        -- update_equipment(unit, event.grid)
+        -- break
+      -- end
+    -- else
+      -- global.vehicles[unit] = nil
+      -- global.braking_vehicles[unit] = nil
+      -- transformer_for_unit[unit] = nil
+      -- regen_brake_for_unit[unit] = nil
+    -- end
+  -- end
 -- end)
 
 script.on_event(defines.events.on_built_entity, function(event)
