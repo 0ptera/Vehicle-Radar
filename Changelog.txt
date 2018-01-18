@@ -1,10 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.2
+Date: 18.1.2017
+  Features:
+    - switched from rgb to indexed colors reducing graphic size to 25%
+---------------------------------------------------------------------------------------------------
 Version: 0.4.1
 Date: 30.12.2017
   Features:
     - added hr graphics
   Bugfixes:
-    - trackers are sorted after trains and vehicles repectivly
+    - trackers are sorted after trains and vehicles respectively
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 26.12.2017
