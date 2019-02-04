@@ -1,6 +1,18 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.4
+Date: 4.2.2019
+  Bugfixes:
+    - script placed vehicles where not recognized   
+  Changes:
+    - push to 0.16.51 stable
+---------------------------------------------------------------------------------------------------
+Version: 0.4.3
+Date: 31.10.2018
+  Bugfixes:
+    - mining vehicle tracker returned train tracker
+---------------------------------------------------------------------------------------------------
 Version: 0.4.2
-Date: 18.1.2017
+Date: 18.1.2018
   Features:
     - switched from rgb to indexed colors reducing graphic size to 25%
 ---------------------------------------------------------------------------------------------------
@@ -17,7 +29,7 @@ Date: 26.12.2017
     - updated to Factorio 0.16
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
-Date: 26.12.2017
+Date: 6.9.2017
   Features:
     - partially rewritten for 0.15 compability
     - created new sprites from current radar

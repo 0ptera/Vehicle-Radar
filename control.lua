@@ -5,49 +5,29 @@ require("config")
 function init_force(force)
   global.trains[force.name] = {}
   global.vehicles[force.name] = {}
+  local train_count = 0
+  local car_count = 0  
   for _,surface in pairs(game.surfaces) do
     local locomotives = surface.find_entities_filtered{force = force, type = "locomotive"}
     for _,loco in pairs(locomotives) do
-      table.insert(global.trains[force.name], loco)
-      -- if loco.grid then
-        -- local grid_contents = loco.grid.get_contents()
-        -- if grid_contents then
-          -- for equipment, count in pairs (grid_contents) do
-            -- if equipment == "tracker-module" then
-              -- log("[VT] Found "..count.." tracker modules in locomotive "..loco.backer_name)
-              -- table.insert(global.trains[force.name], loco)
-              -- break
-            -- end
-          -- end
-        -- end
-      -- end
+      global.trains[force.name][loco.unit_number] = loco
+      train_count = train_count + 1
     end
 
     local cars = surface.find_entities_filtered{force = force, type = "car"}
     for _,car in pairs(cars) do
-      table.insert(global.vehicles[force.name], car)
-      -- if car.grid then
-        -- local grid_contents = car.grid.get_contents()
-        -- if grid_contents then
-          -- for equipment, count in pairs (grid_contents) do
-            -- if equipment == "tracker-module" then
-              -- log("[VT] Found "..count.." tracker modules in vehicle")
-              -- table.insert(global.vehicles[force.name], car)
-              -- break
-            -- end
-          -- end
-        -- end
-      -- end
+      global.vehicles[force.name][car.unit_number] = car
+      car_count = car_count +1
     end
 
   end
-  log("[VT] Found "..#global.trains[force.name].." trains for force "..force.name)
-  log("[VT] Found "..#global.vehicles[force.name].." vehicles for force "..force.name)
+  log("[VT] Found "..train_count.." trains for force "..force.name)
+  log("[VT] Found "..car_count.." vehicles for force "..force.name)
 end
 
 function init()
-  global.trains = global.trains or {}
-  global.vehicles = global.vehicles or {}
+  global.trains = {}
+  global.vehicles = {}
 	for _,force in pairs(game.forces) do
     init_force(force)
 	end
@@ -81,55 +61,30 @@ end)
 
 ---------------------------------------------------------------------------------------------------
 
--- script.on_event(defines.events.on_player_placed_equipment, function(event)
-  -- for unit, entity in pairs(global.vehicles) do
-    -- if(entity.valid) then
-      -- if(entity.grid == event.grid) then
-        -- update_equipment(unit, event.grid)
-        -- break
-      -- end
-    -- else
-      -- global.vehicles[unit] = nil
-      -- global.braking_vehicles[unit] = nil
-      -- transformer_for_unit[unit] = nil
-      -- regen_brake_for_unit[unit] = nil
-    -- end
-  -- end
--- end)
-
--- script.on_event(defines.events.on_player_removed_equipment, function(event)
-  -- for unit, entity in pairs(global.vehicles) do
-    -- if(entity.valid) then
-      -- if(entity.grid == event.grid) then
-        -- update_equipment(unit, event.grid)
-        -- break
-      -- end
-    -- else
-      -- global.vehicles[unit] = nil
-      -- global.braking_vehicles[unit] = nil
-      -- transformer_for_unit[unit] = nil
-      -- regen_brake_for_unit[unit] = nil
-    -- end
-  -- end
--- end)
+-- catches script generated locomotives from cargo ships
+script.on_event(defines.events.on_train_created, function(event)
+  for _, movers in pairs(event.train.locomotives) do
+    for _, loco in pairs(movers) do
+      global.trains[loco.force.name][loco.unit_number] = loco
+    end
+  end
+end)
 
 script.on_event(defines.events.on_built_entity, function(event)
 	local entity = event.created_entity
 	if entity.type == "locomotive" then
-		table.insert(global.trains[entity.force.name], entity)
+    global.trains[entity.force.name][entity.unit_number] = entity
 	end
-	if entity.type == "car" then
-		table.insert(global.vehicles[entity.force.name], entity)
+	if entity.type == "car" then		
+    global.vehicles[entity.force.name][entity.unit_number] = entity
 	end
 end)
 
 script.on_event(defines.events.on_sector_scanned, function(event)
 	if event.radar.name == "train-tracker" then
 		local force = event.radar.force
-    -- log("[VT] scanning "..#global.trains[force.name].." trains for "..force.name)
-		for i=#global.trains[force.name], 1, -1 do
-      local loco = global.trains[force.name][i]
-			if loco.valid then
+    for uid, loco in pairs(global.trains[force.name]) do
+    	if loco.valid then
 
 				local x1 = loco.position.x
 				local y1 = loco.position.y
@@ -151,14 +106,12 @@ script.on_event(defines.events.on_sector_scanned, function(event)
 				-- log("[VT] charting {"..x1-scalf..", "..y1-scalf.."}, {"..x2+scalf..", "..y2+scalf.."}")
 				force.chart(event.radar.surface,{{x1-scalf, y1-scalf}, {x2+scalf, y2+scalf}})
 			else
-				table.remove(global.trains[force.name], i)
+				global.trains[force.name][uid] = nil
 			end
 		end
 	elseif event.radar.name == "vehicular-tracker" then
 		local force = event.radar.force
-    -- log("[VT] scanning "..#global.vehicles[force.name].." vehicles for "..force.name)
-    for i=#global.vehicles[force.name], 1, -1 do
-      local vehicle = global.vehicles[force.name][i]
+    for uid, vehicle in pairs(global.vehicles[force.name]) do      
 			if vehicle.valid then
 
 				local x1 = vehicle.position.x
@@ -168,7 +121,7 @@ script.on_event(defines.events.on_sector_scanned, function(event)
         -- log("[VT] charting {"..x1-scalf..", "..y1-scalf.."}, {"..x1+scalf..", "..y1+scalf.."}")
 				force.chart(event.radar.surface,{{x1-scalf, y1-scalf}, {x1+scalf, y1+scalf}})
 			else
-				table.remove(global.vehicles[force.name], i)
+        global.vehicles[force.name][uid] = nil
 			end
 		end
 	end
