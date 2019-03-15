@@ -6,7 +6,7 @@ function init_force(force)
   global.trains[force.name] = {}
   global.vehicles[force.name] = {}
   local train_count = 0
-  local car_count = 0  
+  local car_count = 0
   for _,surface in pairs(game.surfaces) do
     local locomotives = surface.find_entities_filtered{force = force, type = "locomotive"}
     for _,loco in pairs(locomotives) do
@@ -75,7 +75,7 @@ script.on_event(defines.events.on_built_entity, function(event)
 	if entity.type == "locomotive" then
     global.trains[entity.force.name][entity.unit_number] = entity
 	end
-	if entity.type == "car" then		
+	if entity.type == "car" then
     global.vehicles[entity.force.name][entity.unit_number] = entity
 	end
 end)
@@ -85,7 +85,6 @@ script.on_event(defines.events.on_sector_scanned, function(event)
 		local force = event.radar.force
     for uid, loco in pairs(global.trains[force.name]) do
     	if loco.valid then
-
 				local x1 = loco.position.x
 				local y1 = loco.position.y
 				local x2 = x1 + loco.train.speed * train_tracker.precognotion * math.sin(2*math.pi * loco.orientation)
@@ -101,25 +100,19 @@ script.on_event(defines.events.on_sector_scanned, function(event)
 					y1 = y2
 					y2 = y
 				end
-
-        local scalf = train_tracker.scan_radius
-				-- log("[VT] charting {"..x1-scalf..", "..y1-scalf.."}, {"..x2+scalf..", "..y2+scalf.."}")
-				force.chart(event.radar.surface,{{x1-scalf, y1-scalf}, {x2+scalf, y2+scalf}})
+				force.chart(event.radar.surface,{{x1-train_tracker.scan_radius, y1-train_tracker.scan_radius}, {x2+train_tracker.scan_radius, y2+train_tracker.scan_radius}})
 			else
 				global.trains[force.name][uid] = nil
 			end
 		end
 	elseif event.radar.name == "vehicular-tracker" then
 		local force = event.radar.force
-    for uid, vehicle in pairs(global.vehicles[force.name]) do      
+    for uid, vehicle in pairs(global.vehicles[force.name]) do
 			if vehicle.valid then
-
 				local x1 = vehicle.position.x
 				local y1 = vehicle.position.y
 
-				local scalf = vehicle_tracker.scan_radius
-        -- log("[VT] charting {"..x1-scalf..", "..y1-scalf.."}, {"..x1+scalf..", "..y1+scalf.."}")
-				force.chart(event.radar.surface,{{x1-scalf, y1-scalf}, {x1+scalf, y1+scalf}})
+				force.chart(event.radar.surface,{{x1-vehicle_tracker.scan_radius, y1-vehicle_tracker.scan_radius}, {x1+vehicle_tracker.scan_radius, y1+vehicle_tracker.scan_radius}})
 			else
         global.vehicles[force.name][uid] = nil
 			end

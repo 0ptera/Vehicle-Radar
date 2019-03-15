@@ -1,8 +1,25 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.1
+Date: 5.3.2019
+  Features:
+    - reduced tech cost to 200 red and green science
+    - added tech description for en and de
+---------------------------------------------------------------------------------------------------
+Version: 0.4.0
+Date: 26.2.2019
+  Features:
+    - updated to Factorio 0.17
+    - added thumbnail
+---------------------------------------------------------------------------------------------------
+Version: 0.4.5
+Date: 4.2.2019
+  Features:
+    - Finnish translation by Aidan647
+---------------------------------------------------------------------------------------------------
 Version: 0.4.4
 Date: 4.2.2019
   Bugfixes:
-    - script placed vehicles where not recognized   
+    - script placed vehicles where not recognized
   Changes:
     - push to 0.16.51 stable
 ---------------------------------------------------------------------------------------------------

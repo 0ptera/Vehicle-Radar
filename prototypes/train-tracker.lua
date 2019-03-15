@@ -21,8 +21,7 @@ data:extend({
     type = "item",
     name = "train-tracker",
     icon = "__Vehicle_Radar__/graphics/train-tracker-icon.png",
-    icon_size = 32,
-    flags = {"goes-to-quickbar"},
+    icon_size = 32,    
     subgroup = "transport",
     order = "a[train-system]-x[train-tracker]",
     place_result = "train-tracker",
@@ -34,7 +33,7 @@ data:extend({
     enabled = false,
     ingredients =
     {
-      {"radar", 2},
+      {"radar", 1},
       {"iron-gear-wheel", 50},
       {"steel-plate", 30},
       {"advanced-circuit", 25},
