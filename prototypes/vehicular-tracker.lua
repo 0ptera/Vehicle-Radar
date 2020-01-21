@@ -1,7 +1,8 @@
 local tracker = table.deepcopy(data.raw["radar"]["radar"])
 tracker.name = "vehicular-tracker"
-tracker.icon =  "__Vehicle_Radar__/graphics/car-tracker-icon.png"
+tracker.icon = "__Vehicle_Radar__/graphics/car-tracker-icon.png"
 tracker.icon_size = 32
+tracker.icon_mipmaps = 1
 tracker.minable.result = "vehicular-tracker"
 tracker.energy_per_sector = vehicle_tracker.energy_usage * vehicle_tracker.refresh_time .. "kJ"
 tracker.max_distance_of_sector_revealed = 0
@@ -20,13 +21,13 @@ data:extend({
   {
     type = "item",
     name = "vehicular-tracker",
-    icon =  "__Vehicle_Radar__/graphics/car-tracker-icon.png",
-    icon_size = 32,    
+    icon = "__Vehicle_Radar__/graphics/car-tracker-icon.png",
+    icon_size = 32,
     subgroup = "transport",
     order = "b[vehicles]-x[vehicular-tracker]",
     place_result = "vehicular-tracker",
     stack_size = 5
-  },  
+  },
   {
     type = "recipe",
     name = "vehicular-tracker",
