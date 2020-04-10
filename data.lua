@@ -1,5 +1,6 @@
-require("config")
+-- local optera_lib = require("__OpteraLib__.data.utilities")
 
-require("prototypes.technology")
-require("prototypes.train-tracker")
-require("prototypes.vehicular-tracker")
+require("prototypes.technologies")
+require("prototypes.recipes")
+require("prototypes.items")
+require("prototypes.entities")

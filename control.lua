@@ -1,4 +1,4 @@
-require("config")
+local config = require("config")
 
 ---------------------------------------------------------------------------------------------------
 
@@ -84,8 +84,8 @@ script.on_event(defines.events.on_sector_scanned,
         if loco.valid then
           local x1 = loco.position.x
           local y1 = loco.position.y
-          local x2 = x1 + loco.train.speed * train_tracker.precognotion * math.sin(2*math.pi * loco.orientation)
-          local y2 = y1 - loco.train.speed * train_tracker.precognotion * math.cos(2*math.pi * loco.orientation)
+          local x2 = x1 + loco.train.speed * config.train_tracker.precognotion * math.sin(2*math.pi * loco.orientation)
+          local y2 = y1 - loco.train.speed * config.train_tracker.precognotion * math.cos(2*math.pi * loco.orientation)
 
           if x2 < x1 then
             local x = x1
@@ -97,7 +97,7 @@ script.on_event(defines.events.on_sector_scanned,
             y1 = y2
             y2 = y
           end
-          force.chart(event.radar.surface,{{x1-train_tracker.scan_radius, y1-train_tracker.scan_radius}, {x2+train_tracker.scan_radius, y2+train_tracker.scan_radius}})
+          force.chart(event.radar.surface,{{x1-config.train_tracker.scan_radius, y1-config.train_tracker.scan_radius}, {x2+config.train_tracker.scan_radius, y2+config.train_tracker.scan_radius}})
         else
           global.trains[force.name][uid] = nil
         end
@@ -109,7 +109,7 @@ script.on_event(defines.events.on_sector_scanned,
           local x1 = vehicle.position.x
           local y1 = vehicle.position.y
 
-          force.chart(event.radar.surface,{{x1-vehicle_tracker.scan_radius, y1-vehicle_tracker.scan_radius}, {x1+vehicle_tracker.scan_radius, y1+vehicle_tracker.scan_radius}})
+          force.chart(event.radar.surface,{{x1-config.vehicle_tracker.scan_radius, y1-config.vehicle_tracker.scan_radius}, {x1+config.vehicle_tracker.scan_radius, y1+config.vehicle_tracker.scan_radius}})
         else
           global.vehicles[force.name][uid] = nil
         end

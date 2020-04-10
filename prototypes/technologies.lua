@@ -2,7 +2,7 @@ data:extend({
 	{
     type = "technology",
     name = "radar-tracker",
-    icon = "__Vehicle_Radar__/graphics/train-tracker-technology.png",
+    icon = "__Vehicle_Radar__/graphics/radar_technology.png",
     icon_size = 128,
     prerequisites = {"advanced-electronics"},
     effects =
