@@ -4,14 +4,15 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
     {
       "type": "factoriomod",
       "request": "launch",
       "name": "Factorio Mod Debug",
       "factorioPath": "D:/Factorio_0.18/bin/x64/factorio.exe",
       "configPath": "D:/Factorio_0.18/config/config.ini",
-      // "factorioArgs": ["--mod-directory", "D:/Factorio_0.18/mods - dev"],
-      "modsPath": "D:/Factorio_0.18/mods - dev"
+      "modsPath": "D:/Factorio_0.18/mods - dev",
+      "hookData": true
     }
   ]
 }

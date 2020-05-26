@@ -1,11 +1,11 @@
 {
   "name": "Vehicle_Radar",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "title": "Vehicle Radar",
   "author": "Optera",
   "contact": "https://forums.factorio.com/memberlist.php?mode=viewprofile&u=21729",
   "homepage": "",
   "description": "Adds two radars revealing locomotives and vehicles.",
   "factorio_version": "0.18",
-  "dependencies": ["base >= 0.18.9", "OpteraLib >= 0.2.0"]
+  "dependencies": ["base >= 0.18.9", "flib >= 0.1.0"]
 }

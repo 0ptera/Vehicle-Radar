@@ -1,8 +1,8 @@
 
+local copy_prototype = require('__flib__.data_util').copy_prototype
 local config = require("config")
 
-
-local train_tracker = optera_lib.copy_prototype(data.raw["radar"]["radar"], "train-tracker")
+local train_tracker = copy_prototype(data.raw["radar"]["radar"], "train-tracker")
 train_tracker.icon = "__Vehicle_Radar__/graphics/radar2_icon.png"
 train_tracker.icon_size = 32
 train_tracker.icon_mipmaps = 1
@@ -40,7 +40,7 @@ train_tracker.water_reflection = {
   orientation_to_variation = false
 }
 
-local vehicle_tracker = optera_lib.copy_prototype(train_tracker, "vehicular-tracker")
+local vehicle_tracker = copy_prototype(train_tracker, "vehicular-tracker")
 vehicle_tracker.icon = "__Vehicle_Radar__/graphics/radar1_icon.png"
 vehicle_tracker.pictures = {
   filename = "__Vehicle_Radar__/graphics/radar1_entity.png",
