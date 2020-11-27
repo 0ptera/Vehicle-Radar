@@ -1,5 +1,5 @@
 
-local copy_prototype = require('__flib__.data_util').copy_prototype
+local copy_prototype = require('__flib__.data-util').copy_prototype
 local config = require("config")
 
 local train_tracker = copy_prototype(data.raw["radar"]["radar"], "train-tracker")

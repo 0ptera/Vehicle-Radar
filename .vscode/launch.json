@@ -9,9 +9,9 @@
       "type": "factoriomod",
       "request": "launch",
       "name": "Factorio Mod Debug",
-      "factorioPath": "D:/Factorio_0.18/bin/x64/factorio.exe",
-      "configPath": "D:/Factorio_0.18/config/config.ini",
-      "modsPath": "D:/Factorio_0.18/mods - dev",
+      "factorioPath": "D:/Factorio_1.1/bin/x64/factorio.exe",
+      "configPath": "D:/Factorio_1.1/config/config.ini",
+      "modsPath": "D:/Factorio_1.1/mods - dev",
       "hookData": true
     }
   ]
